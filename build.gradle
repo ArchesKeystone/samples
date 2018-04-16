@@ -1,0 +1,68 @@
+buildscript {
+
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+		maven { url "https://repo.spring.io/libs-snapshot"}
+		maven { url "https://plugins.gradle.org/m2/" }
+	}
+	dependencies {
+
+	}
+}
+
+plugins {
+
+}
+
+apply plugin: 'java'
+
+sourceSets {
+    main {
+        resources {
+            srcDirs "src/main/resources", "src/main/configs"
+        }
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+	jcenter()
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+	maven { url "https://repo.spring.io/libs-snapshot"}
+}
+
+
+dependencies {
+	compile 'org.apache.httpcomponents:httpclient:4.5.5'
+	compile 'com.google.code.gson:gson:2.8.2'
+	compile files('lib/keystone_model.jar')
+
+	//testCompileOnly(
+    //        'junit:junit:4.12'
+    //)
+
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    )
+    testRuntimeOnly(
+            'org.junit.jupiter:junit-jupiter-engine:5.1.0'
+            //If you want to run JUnit 3/4 test with JUnit Jupiter Platform,
+            //you have add the following dependency to this dependency configuration:
+            //'org.junit.vintage:junit-vintage-engine:5.1.0'
+    )
+
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+    }
+}
